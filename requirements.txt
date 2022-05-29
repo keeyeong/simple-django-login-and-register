@@ -7,3 +7,4 @@ setuptools==59.6.0
 soupsieve==2.3.2.post1
 sqlparse==0.4.2
 wheel==0.37.1
+mozilla-django-oidc==2.0.0
