@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  django:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./source:/app
+    ports:
+      - "8000:8000"
