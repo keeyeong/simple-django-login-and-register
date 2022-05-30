@@ -74,7 +74,7 @@ class LogInView(GuestOnlyView, FormView):
             if not form.cleaned_data['remember_me']:
                 request.session.set_expiry(0)
 
-        login(request, form.user_cache)
+        login(request, form.user_cache, backend='django.contrib.auth.backends.ModelBackend')
 
         redirect_to = request.POST.get(REDIRECT_FIELD_NAME, request.GET.get(REDIRECT_FIELD_NAME))
         url_is_safe = is_safe_url(redirect_to, allowed_hosts=request.get_host(), require_https=request.is_secure())

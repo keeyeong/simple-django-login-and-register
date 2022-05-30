@@ -18,6 +18,7 @@ SITE_ID = 1
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'mozilla_django_oidc',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -92,11 +93,26 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
+)
+
+KEYCLOAK_REALM=os.getenv('KEYCLOAK_REALM')
+OIDC_OP_AUTHORIZATION_ENDPOINT = f"http://keycloak:8080/realms/{KEYCLOAK_REALM}/protocol/openid-connect/auth"
+OIDC_OP_TOKEN_ENDPOINT = f"http://keycloak:8080/realms/{KEYCLOAK_REALM}/protocol/openid-connect/token"
+OIDC_OP_USER_ENDPOINT = f"http://keycloak:8080/realms/{KEYCLOAK_REALM}/protocol/openid-connect/userinfo"
+OIDC_RP_CLIENT_SECRET=os.getenv('KEYCLOAK_SECRET')
+OIDC_RP_CLIENT_ID=os.getenv('KEYCLOAK_CLIENT')
+OIDC_RP_SIGN_ALGO="RS256"
+OIDC_OP_JWKS_ENDPOINT = f"http://keycloak:8080/realms/{KEYCLOAK_REALM}/protocol/openid-connect/certs"
+
 ENABLE_USER_ACTIVATION = True
 DISABLE_USERNAME = False
 LOGIN_VIA_EMAIL = True
 LOGIN_VIA_EMAIL_OR_USERNAME = False
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'accounts:log_in'
 USE_REMEMBER_ME = True
 

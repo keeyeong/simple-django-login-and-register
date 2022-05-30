@@ -14,6 +14,8 @@ urlpatterns = [
     path('language/', ChangeLanguageView.as_view(), name='change_language'),
 
     path('accounts/', include('accounts.urls')),
+
+    path('oidc/', include('mozilla_django_oidc.urls')),
 ]
 
 if settings.DEBUG:

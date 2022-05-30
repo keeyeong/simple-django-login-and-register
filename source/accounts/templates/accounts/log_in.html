@@ -13,6 +13,7 @@
         {% bootstrap_form form %}
 
         <button class="btn btn-primary">{% trans 'Log in' %}</button>
+        <a class="btn btn-primary" href="{% url 'oidc_authentication_init' %}">Keycloak Login</a>
 
     </form>
 
